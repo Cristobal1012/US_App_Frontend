@@ -1,0 +1,20 @@
+.dashboard-container { padding: 20px; max-width: 1200px; margin: 0 auto; }
+
+/* Tarjetas de arriba */
+.stats-row { display: flex; gap: 20px; justify-content: space-between; margin-bottom: 30px; }
+.stat-card { flex: 1; text-align: center; padding: 20px 0; border-radius: 10px; }
+.pink-bg { background-color: #ffe0e0; color: #333; } /* Rosado */
+.stat-card h1 { font-size: 2.5rem; margin: 10px 0 0 0; font-weight: bold; }
+
+/* Botones */
+.actions-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
+.btn-green { background-color: #4ade80 !important; color: black !important; }
+.btn-red { background-color: #f87171 !important; color: black !important; }
+.btn-yellow { background-color: #facc15 !important; color: black !important; }
+.btn-purple { background-color: #818cf8 !important; color: white !important; }
+
+/* Gráfico de barras falso */
+.chart-container { height: 300px; background-color: #f9fafb; display: flex; align-items: flex-end; justify-content: center; padding: 20px; }
+.fake-chart { display: flex; gap: 40px; align-items: flex-end; height: 100%; width: 80%; }
+.bar { width: 40px; background-color: #a78bfa; border-radius: 5px 5px 0 0; opacity: 0.8; }
+.bar:nth-child(even) { background-color: #34d399; }
