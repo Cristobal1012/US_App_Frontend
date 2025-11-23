@@ -1,44 +1,63 @@
-<div class="dashboard-container">
-  
-  <div class="stats-row">
+<div class="dashboard-wrapper">
+  <div class="dashboard-container">
     
-    <mat-card class="stat-card pink-bg">
-      <mat-card-content>
-        <h3>Total Incidencias</h3> <h1>{{ stats.total_creadas }}</h1>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="stat-card pink-bg">
-      <mat-card-content>
-        <h3>Derivadas</h3>
-        <h1>{{ stats.count_derivadas }}</h1>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="stat-card pink-bg">
-      <mat-card-content>
-        <h3>Abiertas</h3>
-        <h1>{{ stats.count_abiertas }}</h1>
-      </mat-card-content>
-    </mat-card>
-    
-  </div>
-
-  <div class="actions-row">
-    <button mat-flat-button class="btn-green">Crear encuesta +</button>
-    <button mat-flat-button class="btn-red">Bloquear</button>
-    <button mat-flat-button class="btn-yellow">Inactivo</button>
-    <button mat-flat-button class="btn-purple">Derivar</button>
-  </div>
-
-  <mat-card class="chart-container">
-    <div class="fake-chart">
-      <div class="bar" style="height: 40%"></div>
-      <div class="bar" style="height: 60%"></div>
-      <div class="bar" style="height: 30%"></div>
-      <div class="bar" style="height: 80%"></div>
-      <div class="bar" style="height: 50%"></div>
+    <div class="page-header">
+      <h2>Resumen General</h2>
+      <p class="subtitle">Estadísticas del sistema</p>
     </div>
-  </mat-card>
 
+    <div class="stats-grid">
+      <mat-card class="kpi-card">
+        <mat-card-content>
+          <div class="kpi-icon bg-red-light">
+            <mat-icon class="text-red">assignment_late</mat-icon>
+          </div>
+          <div class="kpi-data">
+            <h3>Total Incidencias</h3>
+            <h1>{{ stats.total_creadas }}</h1>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="kpi-card">
+        <mat-card-content>
+          <div class="kpi-icon bg-blue-light">
+            <mat-icon class="text-blue">call_split</mat-icon>
+          </div>
+          <div class="kpi-data">
+            <h3>Derivadas</h3>
+            <h1>{{ stats.count_derivadas }}</h1>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="kpi-card">
+        <mat-card-content>
+          <div class="kpi-icon bg-green-light">
+            <mat-icon class="text-green">check_circle</mat-icon>
+          </div>
+          <div class="kpi-data">
+            <h3>Abiertas</h3>
+            <h1>{{ stats.count_abiertas }}</h1>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <mat-card class="section-card chart-section">
+      <div class="card-header">
+        <h3>Estadísticas de la Semana</h3>
+      </div>
+      <div class="fake-chart">
+        <div class="bar" style="height: 40%"></div>
+        <div class="bar" style="height: 60%"></div>
+        <div class="bar" style="height: 30%"></div>
+        <div class="bar" style="height: 80%"></div>
+        <div class="bar" style="height: 50%"></div>
+        <div class="bar" style="height: 70%"></div>
+        <div class="bar" style="height: 45%"></div>
+      </div>
+    </mat-card>
+
+  </div>
 </div>

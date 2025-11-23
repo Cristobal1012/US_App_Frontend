@@ -1,0 +1,17 @@
+<div class="success-container">
+  <mat-icon class="icon-success">check_circle</mat-icon>
+  
+  <h2 mat-dialog-title>¡Operación Exitosa!</h2>
+  
+  <mat-dialog-content>
+    <p class="message">La incidencia ha sido derivada correctamente a la cuadrilla seleccionada.</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center">
+    <button mat-stroked-button (click)="cerrar()">Seguir gestionando</button>
+    
+    <button mat-flat-button color="primary" (click)="volverAlMenu()">
+      Volver al Menú
+    </button>
+  </mat-dialog-actions>
+</div>

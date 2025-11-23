@@ -6,19 +6,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
 import { DepartamentosService } from '../services/departamentos';
+
 export interface Departamento {
   id: number;
   nombre: string;
-  encargado: string;
+  encargado_nombre: string;
   correo_encargado: string;
-  direccion: string;
+  direccion_nombre: string; 
   esta_activo: boolean;
 }
 
 @Component({
   selector: 'app-departamento-listar',
-  standalone: true, // Esto permite importar módulos aquí mismo
+  standalone: true,
   imports: [
     CommonModule,
     MatTableModule,
@@ -33,30 +35,34 @@ export interface Departamento {
 })
 export class DepartamentoListarComponent implements OnInit {
   
-  // Las columnas que se verán en la tabla (deben coincidir con el HTML)
   displayedColumns: string[] = ['id', 'nombre', 'encargado', 'direccion', 'estado', 'acciones'];
   
-  // La fuente de datos
   dataSource = new MatTableDataSource<Departamento>([]);
+  filtroValores = {
+    estado: '',
+    direccion: ''
+  };
 
-  // Datos falsos para el filtro de direcciones
   listaDirecciones = [
     { id: 1, nombre: 'Dirección de Obras' },
-    { id: 2, nombre: 'Dirección de Tránsito' }
+    { id: 2, nombre: 'Dirección de Tránsito' },
   ];
-  // 👇 Inyectamos el servicio aquí
-  constructor(private deptoService: DepartamentosService) { }
+
+  constructor(
+    private deptoService: DepartamentosService,
+    private router: Router 
+  ) { }
 
   ngOnInit(): void {
     this.cargarDatosReales();
+    this.configurarFiltros();
   }
 
-  // 👇 Esta función pide los datos a Django
   cargarDatosReales() {
     this.deptoService.getDepartamentos().subscribe({
       next: (datos) => {
         console.log('¡Éxito! Datos recibidos:', datos);
-        this.dataSource.data = datos; // Aquí llenamos la tabla con datos reales
+        this.dataSource.data = datos;
       },
       error: (err) => {
         console.error('Error conectando con Django:', err);
@@ -64,12 +70,56 @@ export class DepartamentoListarComponent implements OnInit {
     });
   }
 
-  // Funciones vacías por ahora (solo para que no den error los botones)
-  aplicarFiltro(valor: string, tipo: string) { console.log('Filtro:', tipo, valor); }
-  crearDepartamento() { console.log('Crear'); }
-  verDepartamento(id: number) { console.log('Ver', id); }
-  editarDepartamento(id: number) { console.log('Editar', id); }
-  toggleEstado(depto: Departamento) { depto.esta_activo = !depto.esta_activo; }
-}
+  configurarFiltros() {
+    this.dataSource.filterPredicate = (data: Departamento, filter: string) => {
+      const searchTerms = JSON.parse(filter);
+      const coincideEstado = searchTerms.estado ? String(data.esta_activo) === searchTerms.estado : true;
+      const coincideDireccion = searchTerms.direccion ? data.direccion_nombre === searchTerms.direccion : true;
 
+      return coincideEstado && coincideDireccion;
+    };
+  }
+
+  aplicarFiltro(valor: string, tipo: string) {
+    if (tipo === 'estado') {
+      this.filtroValores.estado = valor;
+    } else if (tipo === 'direccion') {
+      this.filtroValores.direccion = valor;
+    }
+
+    this.dataSource.filter = JSON.stringify(this.filtroValores);
+    console.log('Filtros aplicados:', this.filtroValores);
+  }
+
+  crearDepartamento() { 
+    this.router.navigate(['/departamentos/crear']);
+  }
+
+  verDepartamento(id: number) { 
+    this.router.navigate(['/departamentos/ver', id]);
+  }
+
+  editarDepartamento(id: number) { 
+    this.router.navigate(['/departamentos/editar', id]);
+  }
+
+  toggleEstado(depto: Departamento) {
+    const nuevoEstado = !depto.esta_activo;
+
+    this.deptoService.actualizarEstado(depto.id, nuevoEstado).subscribe({
+      next: (respuesta) => {
+        depto.esta_activo = nuevoEstado;
+        console.log(`Departamento ${depto.nombre} actualizado a: ${nuevoEstado}`);
+        
+        const filtrosActuales = this.dataSource.filter;
+        this.dataSource.filter = ''; 
+        this.dataSource.filter = filtrosActuales;
+      },
+      error: (error) => {
+        console.error('No se pudo actualizar el estado:', error);
+        alert('Hubo un error al intentar cambiar el estado.');
+      }
+    });
+  }
+}
 

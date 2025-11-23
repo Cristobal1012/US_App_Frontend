@@ -36,8 +36,12 @@
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-stroked-button class="btn-ver">Ver</button>
-          <button mat-flat-button class="btn-derivar">Derivar</button>
+          
+          <button mat-stroked-button class="btn-ver" (click)="verDetalle(element.id)">Ver</button>
+          
+          <button mat-flat-button class="btn-derivar" (click)="abrirDerivacion(element)">
+            Derivar
+          </button>
         </td>
       </ng-container>
 

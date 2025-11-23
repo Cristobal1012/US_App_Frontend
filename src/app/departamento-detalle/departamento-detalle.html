@@ -1,0 +1,47 @@
+<div class="container">
+  
+  <mat-card *ngIf="incidencia" class="detalle-card">
+    
+    <div class="card-header-custom">
+      <h2 class="card-title">Incidencia #{{ incidencia?.id }}</h2>
+      <span class="badge" [ngClass]="getColorEstado(incidencia?.estado)">
+        {{ incidencia?.estado }}
+      </span>
+    </div>
+
+    <mat-card-content class="content-wrapper">
+      
+      <div class="detail-grid">
+        
+        <div class="detail-item">
+          <label>Tipo de Incidencia</label>
+          <p>{{ incidencia?.tipo_nombre || 'N/A' }}</p>
+        </div>
+
+        <div class="detail-item full-width">
+          <label>Descripción</label>
+          <p class="descripcion-text">{{ incidencia?.descripcion }}</p>
+        </div>
+
+        <div class="detail-item">
+          <label>Dirección</label>
+          <p>{{ incidencia?.direccion_textual || incidencia?.direccion_nombre || 'Sin registrar' }}</p>
+        </div>
+
+        <div class="detail-item">
+          <label>Departamento Encargado</label>
+          <p>{{ incidencia?.departamento_nombre || 'Sin asignar' }}</p>
+        </div>
+
+      </div>
+      
+    </mat-card-content>
+
+    <mat-card-actions align="end" class="actions-container">
+      <button mat-stroked-button class="btn-volver" (click)="volver()">
+        <mat-icon>arrow_back</mat-icon> Volver a incidencias
+      </button>
+    </mat-card-actions>
+    
+  </mat-card>
+</div>

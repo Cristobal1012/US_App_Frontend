@@ -26,7 +26,6 @@ table {
   width: 100%;
 }
 
-/* Estilos de las etiquetas Activo/Inactivo */
 .badge {
   padding: 6px 12px;
   border-radius: 20px;
@@ -36,9 +35,9 @@ table {
 }
 
 .bg-success {
-  background-color: #2e7d32; /* Verde */
+  background-color: #2e7d32; 
 }
 
 .bg-danger {
-  background-color: #d32f2f; /* Rojo */
+  background-color: #d32f2f; 
 }

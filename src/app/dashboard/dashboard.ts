@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,8 +14,7 @@ import { DashboardService } from '../services/dashboard';
   styleUrl: './dashboard.css'
 })
 export class DashboardComponent implements OnInit {
-  
-  // Aquí guardaremos los números que lleguen de Django
+
   stats: any = {
     total_creadas: 0,
     count_derivadas: 0,
@@ -24,8 +23,10 @@ export class DashboardComponent implements OnInit {
     count_abiertas: 0
   };
 
-  // Inyectamos el servicio
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.cargarEstadisticas();
@@ -35,7 +36,8 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getStats().subscribe({
       next: (data) => {
         console.log('Stats recibidas de Django:', data);
-        this.stats = data; // ¡Actualizamos los números!
+        this.stats = data; 
+        this.cd.detectChanges();
       },
       error: (err) => {
         console.error('Error conectando con el Dashboard:', err);

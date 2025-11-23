@@ -3,15 +3,77 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 260px;
+  background-color: #eaeaea; 
+  color: #e5e7eb; 
+  border-right: none;
 }
 
+
 .sidenav .mat-toolbar {
-  background: inherit;
+  background-color: #7d9cc4; 
+  color: white;
+  border-bottom: 1px solid #a0aec4;
+  font-size: 16px;
+}
+
+.menu-title {
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+mat-nav-list a {
+  color: #9ca3af !important;
+  transition: all 0.2s ease;
+  margin: 8px 10px;
+  border-radius: 8px;
+  height: 48px;
+}
+
+mat-nav-list mat-icon {
+  color: #356cdc !important; 
+  margin-right: 12px;
+}
+
+mat-nav-list a:hover {
+  background-color: #446697; 
+  color: white !important;
+}
+
+mat-nav-list a:hover mat-icon {
+  color: #14335b !important; 
+}
+
+.active-link {
+  background-color: #2563eb !important; 
+  color: white !important;
 }
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: white; 
+  color: #1f2937; 
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); 
+}
+
+.app-logo {
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-left: 10px;
+  color: #2563eb;
+}
+
+
+.mat-toolbar button {
+  color: #a3badb; 
 }

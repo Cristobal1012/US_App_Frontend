@@ -1,0 +1,31 @@
+<div class="dialog-header">
+  <h2 mat-dialog-title>Derivar Incidencia #{{ data.id }}</h2>
+</div>
+
+<mat-dialog-content class="dialog-body">
+  
+  <div class="info-box">
+    <p class="instruction-text">Seleccione la cuadrilla que se hará cargo de:</p>
+    <p class="incidencia-nombre">{{ data.tipo_nombre }}</p>
+  </div>
+  
+  <mat-form-field appearance="outline" class="full-width custom-select">
+    <mat-label>Seleccionar Cuadrilla</mat-label>
+    <mat-select [(ngModel)]="cuadrillaSeleccionada">
+      <mat-option *ngFor="let c of cuadrillas" [value]="c.id">
+        {{ c.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+  
+  <button mat-flat-button class="btn-confirmar" 
+          [disabled]="!cuadrillaSeleccionada" 
+          (click)="confirmar()">
+    Confirmar Derivación
+  </button>
+</mat-dialog-actions>
